@@ -1,14 +1,16 @@
 FROM php:5.6-fpm-alpine
+
 # Install packages and remove default server definition
 RUN apk --no-cache add gnupg autoconf make g++ nginx supervisor zlib-dev libpng-dev icu-dev icu-libs git libzip-dev && \
     rm /etc/nginx/conf.d/default.conf
 
 # Install PHP extensions
-RUN apk add g++ gcc unixodbc-dev unixodbc freetds-dev freetds 
-RUN docker-php-ext-install bcmath gd exif pcntl intl zip calendar mssql &&\ 
+RUN apk add g++ gcc unixodbc-dev unixodbc freetds-dev freetds
+RUN docker-php-ext-install bcmath gd exif pcntl intl zip calendar mssql && \ 
     docker-php-ext-configure mssql
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 
 # Configure nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf
@@ -30,7 +32,7 @@ RUN chown -R nobody.nobody /var/www/html && \
   chown -R nobody.nobody /var/log/nginx
 
 # Switch to use a non-root user from here on
-USER root
+USER www-data
 
 # Add application
 WORKDIR /var/www/html
