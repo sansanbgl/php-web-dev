@@ -1,7 +1,7 @@
 FROM php:5.6-fpm-alpine
 
 # Install packages and remove default server definition
-RUN apk --no-cache add gnupg autoconf make g++ nginx supervisor zlib-dev libpng-dev icu-dev icu-libs git libzip-dev && \
+RUN apk --no-cache add gnupg autoconf make g++ nginx supervisor zlib-dev libpng-dev icu-dev icu-libs librdkafka-dev git libzip-dev && \
     rm /etc/nginx/conf.d/default.conf
 
 # Install PHP extensions
@@ -31,7 +31,7 @@ RUN chown -R nobody.nobody /var/www/html && \
   chown -R nobody.nobody /var/log/nginx
 
 # Switch to use a non-root user from here on
-USER www-data
+USER root
 
 # Add application
 WORKDIR /var/www/html
