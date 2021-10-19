@@ -24,9 +24,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 COPY config/vhost.conf /etc/apache2/sites-available/000-default.conf
 COPY config/php.ini /usr/local/etc/php/
-COPY conf.d/ /usr/local/etc/php/conf.d/
+# COPY conf.d/ /usr/local/etc/php/conf.d/
 COPY freetds/ /etc/freetds/
-
-COPY no-debug-non-zts-20131226/ /usr/local/lib/php/extensions/no-debug-non-zts-20131226/
+COPY no-debug-non-zts-20131226/curl.so /usr/lib/php5/20100525/curl.so
+# COPY no-debug-non-zts-20131226/ /usr/local/lib/php/extensions/no-debug-non-zts-20131226/
 RUN chmod 711 -R /usr/local/lib/php/extensions/no-debug-non-zts-20131226/
 RUN chown -R www-data:www-data /var/www && a2enmod rewrite
