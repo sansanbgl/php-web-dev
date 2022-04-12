@@ -8,7 +8,7 @@ RUN apk --no-cache add gnupg autoconf make g++ nginx supervisor zlib-dev libpng-
 RUN docker-php-ext-install bcmath gd exif pcntl intl zip
 
 # Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer:1.10.6 /usr/bin/composer /usr/bin/composer
 
 # Install unixodbc-dev required for pecl
 RUN apk add --allow-untrusted unixodbc-dev
