@@ -1,4 +1,4 @@
-FROM dptsi/php7.0-fpm-alpine
+FROM php:7.0-fpm
 
 # Install packages and remove default server definition
 RUN apk --no-cache add gnupg autoconf make g++ nginx supervisor zlib-dev libpng-dev icu-dev icu-libs librdkafka-dev git libzip-dev && \
