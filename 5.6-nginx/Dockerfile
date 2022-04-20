@@ -9,7 +9,7 @@ RUN apk add g++ gcc unixodbc-dev unixodbc freetds-dev freetds
 RUN docker-php-ext-install bcmath gd exif pcntl intl zip calendar mssql
 RUN docker-php-ext-configure mssql
 # Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.2.0 /usr/bin/composer /usr/bin/composer
 
 # Configure nginx
 COPY config/nginx.conf /etc/nginx/nginx.conf
