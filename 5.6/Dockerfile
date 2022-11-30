@@ -3,6 +3,7 @@ FROM php:5.6-apache
 RUN apt-get update && apt-get install -y --no-install-recommends \
         libcurl4-openssl-dev \
         libedit-dev \
+        git \
         libsqlite3-dev \
         libssl-dev \
         libxml2-dev \
