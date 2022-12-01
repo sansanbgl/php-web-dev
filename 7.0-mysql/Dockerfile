@@ -5,7 +5,7 @@ RUN apk --no-cache add gnupg autoconf make g++ nginx supervisor zlib-dev libpng-
     rm /etc/nginx/conf.d/default.conf
 
 # Install PHP extensions
-RUN docker-php-ext-install bcmath gd exif pcntl intl zip
+RUN docker-php-ext-install bcmath gd exif pcntl intl zip mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
 
 # Get latest Composer
 COPY --from=composer:1.10.6 /usr/bin/composer /usr/bin/composer

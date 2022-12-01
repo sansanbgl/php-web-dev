@@ -3,6 +3,7 @@ FROM php:5.6-apache
 RUN apt-get update && apt-get install -y --no-install-recommends \
         libcurl4-openssl-dev \
         libedit-dev \
+        git \
         libsqlite3-dev \
         libssl-dev \
         libxml2-dev \
@@ -21,6 +22,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       && docker-php-ext-configure mssql \
       && chmod 755 /var/www/html -R \
       && chown www-data:www-data /var/www/html
+# Get latest Composer
+COPY --from=composer:2.2.0 /usr/bin/composer /usr/bin/composer
 
 COPY config/vhost.conf /etc/apache2/sites-available/000-default.conf
 COPY config/php.ini /usr/local/etc/php/
